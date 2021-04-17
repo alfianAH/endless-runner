@@ -13,8 +13,9 @@ public class CharacterMoveController : MonoBehaviour
     public float groundRaycastDistance;
     public LayerMask groundLayerMask;
     
-    private Rigidbody2D rb2D;
     private Animator animator;
+    private CharacterSoundController soundController;
+    private Rigidbody2D rb2D;
     
     private bool isJumping,
         isOnGround;
@@ -23,8 +24,9 @@ public class CharacterMoveController : MonoBehaviour
 
     private void Start()
     {
-        rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        soundController = GetComponent<CharacterSoundController>();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -32,7 +34,10 @@ public class CharacterMoveController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (isOnGround)
+            {
                 isJumping = true;
+                soundController.PlayJump();
+            }
         }
         
         // Set jump animation
