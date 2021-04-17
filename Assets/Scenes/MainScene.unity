@@ -1584,7 +1584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAcceleration: 2
   maxSpeed: 4
-  jumpAcceleration: 5
+  jumpAcceleration: 7
   groundRaycastDistance: 1
   groundLayerMask:
     serializedVersion: 2

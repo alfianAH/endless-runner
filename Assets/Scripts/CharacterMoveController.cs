@@ -14,13 +14,17 @@ public class CharacterMoveController : MonoBehaviour
     public LayerMask groundLayerMask;
     
     private Rigidbody2D rb2D;
+    private Animator animator;
     
     private bool isJumping,
         isOnGround;
 
+    private static readonly int IsOnGround = Animator.StringToHash("isOnGround");
+
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -30,6 +34,9 @@ public class CharacterMoveController : MonoBehaviour
             if (isOnGround)
                 isJumping = true;
         }
+        
+        // Set jump animation
+        animator.SetBool(IsOnGround, isOnGround);
     }
 
     private void FixedUpdate()
