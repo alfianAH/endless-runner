@@ -62,6 +62,8 @@ public class CharacterMoveController : MonoBehaviour
             isOnGround = false;
         }
         
+        Debug.Log("isOnGround: " + isOnGround);
+        
         Vector2 velocityVector = rb2D.velocity;
         velocityVector.x = Mathf.Clamp(
             velocityVector.x + moveAcceleration * Time.deltaTime, 
