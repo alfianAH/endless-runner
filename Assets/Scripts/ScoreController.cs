@@ -2,22 +2,30 @@
 
 public class ScoreController : MonoBehaviour
 {
-    private int currentScore;
+    [Header("Score Highlight")] 
+    public int scoreHighlightRange;
+    public CharacterSoundController sound;
 
-    public int CurrentScore
-    {
-        get => currentScore;
-        set => currentScore = value;
-    }
+    private int currentScore;
+    private int lastScoreHighlight;
+    
+    public int CurrentScore => currentScore;
 
     private void Start()
     {
         currentScore = 0;
+        lastScoreHighlight = 0;
     }
 
     public void IncreaseCurrentScore(int increment)
     {
         currentScore += increment;
+
+        if (currentScore - lastScoreHighlight > scoreHighlightRange)
+        {
+            sound.PlayScoreHighlight();
+            lastScoreHighlight += scoreHighlightRange;
+        }
     }
 
     public void FinishScoring()
