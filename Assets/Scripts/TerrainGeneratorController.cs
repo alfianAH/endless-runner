@@ -85,21 +85,33 @@ public class TerrainGeneratorController : MonoBehaviour
             areaEndPosition + Vector3.down*DebugLineHeight/2, 
             Color.red);
     }
-
+    
+    /// <summary>
+    /// Generate terrain 
+    /// </summary>
+    /// <param name="posX">Value of X position</param>
+    /// <param name="forceTerrain">Early force terrain</param>
     private void GenerateTerrain(float posX, TerrainTemplateController forceTerrain = null)
     {
+        // Randomize the terrain
         int randomTerrain = Random.Range(0, terrainTemplates.Count);
-
+        
+        // Generate terrain from pool
         GameObject newTerrain = GenerateFromPool(forceTerrain == null 
             ? terrainTemplates[randomTerrain].gameObject 
             : forceTerrain.gameObject, 
             transform);
-
+        
+        // Set new terrain's position
         newTerrain.transform.position = new Vector3(posX, -4.5f);
         
         spawnedTerrain.Add(newTerrain);
     }
-
+    
+    /// <summary>
+    /// Remove terrain when not in screen
+    /// </summary>
+    /// <param name="posX">Terrain X-axis position</param>
     private void RemoveTerrain(float posX)
     {
         GameObject terrainToRemove = null;
@@ -113,14 +125,22 @@ public class TerrainGeneratorController : MonoBehaviour
                 break;
             }
         }
-
+        // If there is terrain to remove, ...
         if (terrainToRemove)
         {
+            // Remove from spawned terrain
             spawnedTerrain.Remove(terrainToRemove);
+            // Return the terrain to pool
             ReturnToPool(terrainToRemove);
         }
     }
     
+    /// <summary>
+    /// Generate terrain from pool
+    /// </summary>
+    /// <param name="item">Terrain Object</param>
+    /// <param name="parent">Parent's Transform</param>
+    /// <returns></returns>
     private GameObject GenerateFromPool(GameObject item, Transform parent)
     {
         // If item is available in pool, ...
@@ -145,7 +165,11 @@ public class TerrainGeneratorController : MonoBehaviour
 
         return newItem;
     }
-
+    
+    /// <summary>
+    /// Return terrain to pool, so it can be used again
+    /// </summary>
+    /// <param name="item">Terrain object</param>
     private void ReturnToPool(GameObject item)
     {
         if (!pool.ContainsKey(item.name))
