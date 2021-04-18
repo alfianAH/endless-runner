@@ -122,7 +122,7 @@ public class CharacterMoveController : MonoBehaviour
         gameOverScreen.SetActive(true);
         
         // Disable character movement
-        this.enabled = false;
+        enabled = false;
     }
     
     /// <summary>
@@ -130,6 +130,7 @@ public class CharacterMoveController : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
-        Debug.DrawLine(transform.position, transform.position + (Vector3.down* groundRaycastDistance), Color.white);
+        Debug.DrawLine(transform.position, 
+        transform.position + (Vector3.down* groundRaycastDistance), Color.white);
     }
 }
