@@ -17,6 +17,13 @@ public class CharacterMoveController : MonoBehaviour
     public ScoreController score;
     public float scoringRatio;
 
+    [Header("Game Over")] 
+    public GameObject gameOverScreen;
+    public float fallPositionY;
+
+    [Header("Camera")] 
+    public CameraMoveController gameCamera;
+
     private Animator animator;
     private CharacterSoundController soundController;
     private Rigidbody2D rb2D;
@@ -52,11 +59,16 @@ public class CharacterMoveController : MonoBehaviour
         // Calculate Score
         int distancePassed = Mathf.FloorToInt(transform.position.x - lastPositionX);
         int scoreIncrement = Mathf.FloorToInt(distancePassed / scoringRatio);
-        Debug.Log(scoreIncrement);
+        
         if (scoreIncrement > 0)
         {
             score.IncreaseCurrentScore(scoreIncrement);
             lastPositionX += distancePassed;
+        }
+
+        if (transform.position.y < fallPositionY)
+        {
+            GameOver();
         }
     }
 
@@ -93,6 +105,24 @@ public class CharacterMoveController : MonoBehaviour
         }
         
         rb2D.velocity = velocityVector;
+    }
+    
+    /// <summary>
+    /// Game over
+    /// </summary>
+    private void GameOver()
+    {
+        // Set high score
+        score.FinishScoring();
+        
+        // Stop camera movement
+        gameCamera.enabled = false;
+        
+        // Show game over
+        gameOverScreen.SetActive(true);
+        
+        // Disable character movement
+        this.enabled = false;
     }
     
     /// <summary>
