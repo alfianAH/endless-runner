@@ -1403,6 +1403,7 @@ GameObject:
   - component: {fileID: 1991308610}
   - component: {fileID: 1991308609}
   - component: {fileID: 1991308608}
+  - component: {fileID: 1991308615}
   - component: {fileID: 1991308607}
   - component: {fileID: 1991308611}
   - component: {fileID: 1991308613}
@@ -1680,6 +1681,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpAudio: {fileID: 8300000, guid: c54fbc06dbdf19a4c94b1dd9a8c0bc8a, type: 3}
   scoreHighlightAudio: {fileID: 8300000, guid: 4d02968909ad04044a23417d7d4b7d6e, type: 3}
+--- !u!61 &1991308615
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991308606}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.92, y: 1.92}
+    newSize: {x: 1.92, y: 1.92}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.15}
+  m_EdgeRadius: 0
 --- !u!1 &2006528442
 GameObject:
   m_ObjectHideFlags: 0

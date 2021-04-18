@@ -29,6 +29,7 @@ public class CharacterMoveController : MonoBehaviour
     private Rigidbody2D rb2D;
     
     private bool isJumping,
+        canJump,
         isOnGround;
     private float lastPositionX;
     
@@ -46,9 +47,10 @@ public class CharacterMoveController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (isOnGround)
+            if (isOnGround && canJump)
             {
                 isJumping = true;
+                canJump = false;
                 soundController.PlayJump();
             }
         }
@@ -72,25 +74,47 @@ public class CharacterMoveController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // If other is ground, ...
+        if (((1 << other.gameObject.layer) & groundLayerMask) != 0)
+        {
+            // Set player is on ground and can jump
+            isOnGround = true;
+            canJump = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        // If other is ground, ...
+        if (((1 << other.gameObject.layer) & groundLayerMask) != 0)
+        {
+            // Set player is not on ground and can't jump
+            isOnGround = false;
+            canJump = false;
+        }
+    }
+
     private void FixedUpdate()
     {
         // Raycast ground
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, 
-            Vector2.down, groundRaycastDistance, groundLayerMask);
+        // BUG: Raycast is only on the middle, so if player fall on the edge of foot, its animation can't be changed
+        // RaycastHit2D hit = Physics2D.Raycast(transform.position, 
+        //     Vector2.down, groundRaycastDistance, groundLayerMask);
         
-        if (hit)
-        {
-            // If player isn't on ground and velocity is 0,
-            // isOnGround is true
-            if (!isOnGround && rb2D.velocity.y <= 0)
-                isOnGround = true;
-        }
-        else
-        {
-            isOnGround = false;
-        }
-        
-        Debug.Log("isOnGround: " + isOnGround);
+        // if (!hit)
+        // {
+        //     isOnGround = false;
+        //     // If player isn't on ground and velocity is 0,
+        //     // isOnGround is true
+        //     if (!isOnGround && rb2D.velocity.y <= 0)
+        //         isOnGround = true;
+        // }
+        // else
+        // {
+        //     isOnGround = false;
+        // }
         
         Vector2 velocityVector = rb2D.velocity;
         velocityVector.x = Mathf.Clamp(
@@ -121,8 +145,8 @@ public class CharacterMoveController : MonoBehaviour
         // Show game over
         gameOverScreen.SetActive(true);
         
-        // Disable character movement
-        enabled = false;
+        // Destroy character to prevent from falling
+        Destroy(gameObject);
     }
     
     /// <summary>
