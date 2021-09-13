@@ -1,4 +1,5 @@
-﻿using Score;
+﻿using Camera;
+using Score;
 using UnityEngine;
 
 namespace Character
