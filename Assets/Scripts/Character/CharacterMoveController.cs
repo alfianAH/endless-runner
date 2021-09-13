@@ -1,4 +1,4 @@
-﻿using Camera;
+﻿using CameraController;
 using Score;
 using UnityEngine;
 
@@ -158,8 +158,9 @@ namespace Character
         /// </summary>
         private void OnDrawGizmos()
         {
-            Debug.DrawLine(transform.position, 
-                transform.position + (Vector3.down* groundRaycastDistance), Color.white);
+            var position = transform.position;
+            Debug.DrawLine(position, 
+                position + (Vector3.down* groundRaycastDistance), Color.white);
         }
     }
 }
