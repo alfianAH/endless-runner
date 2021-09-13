@@ -25,8 +25,8 @@ namespace Character
         public GameObject gameOverScreen;
         public float fallPositionY;
 
-        [Header("Camera")] 
-        public CameraMoveController gameCamera;
+        [Header("Camera")]
+        private CameraMoveController gameCamera;
 
         private Animator animator;
         private CharacterSoundController soundController;
@@ -42,6 +42,7 @@ namespace Character
 
         private void Start()
         {
+            gameCamera = CameraMoveController.Instance;
             animator = GetComponent<Animator>();
             soundController = GetComponent<CharacterSoundController>();
             rb2D = GetComponent<Rigidbody2D>();

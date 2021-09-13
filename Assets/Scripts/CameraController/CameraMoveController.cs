@@ -2,7 +2,7 @@
 
 namespace CameraController
 {
-    public class CameraMoveController : MonoBehaviour
+    public class CameraMoveController : SingletonBaseClass<CameraMoveController>
     {
         [Header("Position")] 
         public Transform player;
