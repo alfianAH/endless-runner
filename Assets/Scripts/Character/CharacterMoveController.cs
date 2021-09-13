@@ -18,7 +18,7 @@ namespace Character
         public LayerMask groundLayerMask;
 
         [Header("Scoring")] 
-        public ScoreController score;
+        private ScoreController score;
         public float scoringRatio;
 
         [Header("Game Over")] 
@@ -43,6 +43,7 @@ namespace Character
         private void Start()
         {
             gameCamera = CameraMoveController.Instance;
+            score = ScoreController.Instance;
             animator = GetComponent<Animator>();
             soundController = GetComponent<CharacterSoundController>();
             rb2D = GetComponent<Rigidbody2D>();

@@ -11,8 +11,13 @@ namespace UserInterface
         public Text highScore;
     
         [Header("Score")] 
-        public ScoreController scoreController;
-    
+        private ScoreController scoreController;
+
+        private void Start()
+        {
+            scoreController = ScoreController.Instance;
+        }
+
         private void Update()
         {
             currentScore.text = scoreController.CurrentScore.ToString();

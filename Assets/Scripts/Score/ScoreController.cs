@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Score
 {
-    public class ScoreController : MonoBehaviour
+    public class ScoreController : SingletonBaseClass<ScoreController>
     {
         [Header("Score Highlight")] 
         public int scoreHighlightRange;
