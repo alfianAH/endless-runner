@@ -2,7 +2,7 @@
 
 namespace Character
 {
-    public class CharacterSoundController : MonoBehaviour
+    public class CharacterSoundController : SingletonBaseClass<CharacterSoundController>
     {
         public AudioClip jumpAudio;
         public AudioClip scoreHighlightAudio;

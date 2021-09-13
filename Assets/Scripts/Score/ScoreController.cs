@@ -7,7 +7,7 @@ namespace Score
     {
         [Header("Score Highlight")] 
         public int scoreHighlightRange;
-        public CharacterSoundController sound;
+        private CharacterSoundController sound;
 
         private int currentScore;
         private int lastScoreHighlight;
@@ -16,6 +16,8 @@ namespace Score
 
         private void Start()
         {
+            sound = CharacterSoundController.Instance;
+            
             currentScore = 0;
             lastScoreHighlight = 0;
         }
