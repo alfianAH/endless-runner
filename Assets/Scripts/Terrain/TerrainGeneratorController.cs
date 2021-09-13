@@ -23,7 +23,7 @@ namespace Terrain
         private float lastGeneratedPositionX;
         private float lastRemovedPositionX;
     
-        private const float DebugLineHeight = 10.0f;
+        private const float DEBUG_LINE_HEIGHT = 10.0f;
 
         private float GetHorizontalPositionStart()
         {
@@ -73,18 +73,19 @@ namespace Terrain
 
         private void OnDrawGizmos()
         {
-            Vector3 areaStartPosition = transform.position;
-            Vector3 areaEndPosition = transform.position;
+            var position = transform.position;
+            Vector3 areaStartPosition = position;
+            Vector3 areaEndPosition = position;
 
             areaStartPosition.x = GetHorizontalPositionStart();
             areaEndPosition.x = GetHorizontalPositionEnd();
         
-            Debug.DrawLine(areaStartPosition + Vector3.up*DebugLineHeight/2,
-                areaStartPosition + Vector3.down*DebugLineHeight/2, 
+            Debug.DrawLine(areaStartPosition + Vector3.up*DEBUG_LINE_HEIGHT/2,
+                areaStartPosition + Vector3.down*DEBUG_LINE_HEIGHT/2, 
                 Color.red);
         
-            Debug.DrawLine(areaEndPosition + Vector3.up*DebugLineHeight/2,
-                areaEndPosition + Vector3.down*DebugLineHeight/2, 
+            Debug.DrawLine(areaEndPosition + Vector3.up*DEBUG_LINE_HEIGHT/2,
+                areaEndPosition + Vector3.down*DEBUG_LINE_HEIGHT/2, 
                 Color.red);
         }
     

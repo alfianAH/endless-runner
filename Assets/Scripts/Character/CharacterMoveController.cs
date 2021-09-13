@@ -70,7 +70,7 @@ namespace Character
         
             if (scoreIncrement > 0)
             {
-                score.IncreaseCurrentScore(scoreIncrement);
+                AddScore(scoreIncrement);
                 lastPositionX += distancePassed;
             }
 
@@ -126,7 +126,7 @@ namespace Character
             velocityVector.x = Mathf.Clamp(
                 velocityVector.x + moveAcceleration * Time.deltaTime, 
                 0f, maxSpeed);
-        
+
             // If player click the mouse, jump
             if (isJumping)
             {
@@ -135,6 +135,15 @@ namespace Character
             }
         
             rb2D.velocity = velocityVector;
+        }
+        
+        /// <summary>
+        /// Add score
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddScore(int value)
+        {
+            score.IncreaseCurrentScore(value);
         }
     
         /// <summary>
